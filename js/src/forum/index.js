@@ -5,7 +5,7 @@ import CommentPost from 'flarum/forum/components/CommentPost';
 app.initializers.add('nearata-internal-links-noreload', app => {
     const regex = /^\/(?<route>\w+)/;
 
-    extend(CommentPost.prototype, 'oncreate', function () {
+    function addNoReload() {
         const baseUrl = app.forum.attribute('baseUrl');
         const postBody = this.element.querySelector('.Post-body');
         const elements = postBody.querySelectorAll('a');
@@ -54,5 +54,8 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                 }
             });
         }
-    });
+    };
+
+    extend(CommentPost.prototype, 'oncreate', addNoReload);
+    extend(CommentPost.prototype, 'onupdate', addNoReload);
 });
