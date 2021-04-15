@@ -3,7 +3,7 @@ import CommentPost from 'flarum/forum/components/CommentPost';
 
 
 app.initializers.add('nearata-internal-links-noreload', app => {
-    const regex = /^\/(?<route>\w+)\/?(?<par1>\w+)?\/?(?<par2>\w+)?/;
+    const regex = /^\/(?<route>\w+)/;
 
     extend(CommentPost.prototype, 'oncreate', function () {
         const baseUrl = app.forum.attribute('baseUrl');
@@ -31,16 +31,10 @@ app.initializers.add('nearata-internal-links-noreload', app => {
 
                 const groups = found.groups;
                 const route = groups['route'];
-                const par1 = groups['par1'];
-                const par2 = groups['par2'];
 
                 switch (route) {
                     case 'd':
-                        if (typeof par2 === 'undefined') {
-                            m.route.set(app.route('discussion', { id: par1 }));
-                        } else {
-                            m.route.set(app.route('discussion.near', { id: par1, near: par2 }));
-                        }
+                        m.route.set(app.route('discussion', { id: path.replace('/d/', '') }));
                         break;
                     case 'flags':
                     case 'following':
@@ -50,11 +44,10 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                         m.route.set(`/${route}`);
                         break;
                     case 't':
-                        m.route.set(app.route('tag', { tags: par1 }));
+                        m.route.set(app.route('tag', { tags: path.replace('/t/', '') }));
                         break;
                     case 'u':
-                        const suffix = typeof par2 === 'undefined' ? '' : `.${par2}`;;
-                        m.route.set(app.route(`user${suffix}`, { username: par1 }));
+                        m.route.set(app.route(`user`, { username: path.replace('/u/', '') }));
                         break;
                     default:
                         break;
