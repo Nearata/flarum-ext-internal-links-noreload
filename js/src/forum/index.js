@@ -21,19 +21,19 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                 continue;
             }
 
-            const path = href.replace(baseUrl, '');
-            const found = path.match(regex);
-
-            if (found === null) {
-                m.route.set('/');
-                return;
-            }
-
-            const groups = found.groups;
-            const route = groups['route'];
-
             link.addEventListener('click', function (e) {
                 e.preventDefault();
+
+                const path = href.replace(baseUrl, '');
+                const found = path.match(regex);
+
+                if (found === null) {
+                    m.route.set('/');
+                    return;
+                }
+
+                const groups = found.groups;
+                const route = groups['route'];
 
                 switch (route) {
                     case 'd':
