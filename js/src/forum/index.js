@@ -11,6 +11,10 @@ app.initializers.add('nearata-internal-links-noreload', app => {
         const elements = postBody.querySelectorAll('a');
 
         for (const link of elements) {
+            if (link.classList.contains('PostMention')) {
+                continue;
+            }
+
             const href = link.href;
 
             if (!href.startsWith(baseUrl)) {
@@ -18,19 +22,18 @@ app.initializers.add('nearata-internal-links-noreload', app => {
             }
 
             const path = href.replace(baseUrl, '');
+            const found = path.match(regex);
+
+            if (found === null) {
+                m.route.set('/');
+                return;
+            }
+
+            const groups = found.groups;
+            const route = groups['route'];
 
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                const found = path.match(regex);
-
-                if (found === null) {
-                    m.route.set('/');
-                    return;
-                }
-
-                const groups = found.groups;
-                const route = groups['route'];
 
                 switch (route) {
                     case 'd':
