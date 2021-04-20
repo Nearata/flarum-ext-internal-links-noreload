@@ -3,8 +3,6 @@ import CommentPost from 'flarum/forum/components/CommentPost';
 
 
 app.initializers.add('nearata-internal-links-noreload', app => {
-    const regex = /^\/(?<route>\w+)/;
-
     function addNoReload() {
         const baseUrl = app.forum.attribute('baseUrl');
         const postBody = this.element.querySelector('.Post-body');
@@ -25,36 +23,8 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                 e.preventDefault();
 
                 const path = href.replace(baseUrl, '');
-                const found = path.match(regex);
 
-                if (found === null) {
-                    m.route.set('/');
-                    return;
-                }
-
-                const groups = found.groups;
-                const route = groups['route'];
-
-                switch (route) {
-                    case 'd':
-                        m.route.set(app.route('discussion', { id: path.replace('/d/', '') }));
-                        break;
-                    case 'flags':
-                    case 'following':
-                    case 'notifications':
-                    case 'settings':
-                    case 'tags':
-                        m.route.set(`/${route}`);
-                        break;
-                    case 't':
-                        m.route.set(app.route('tag', { tags: path.replace('/t/', '') }));
-                        break;
-                    case 'u':
-                        m.route.set(app.route(`user`, { username: path.replace('/u/', '') }));
-                        break;
-                    default:
-                        break;
-                }
+                m.route.set(path);
             });
         }
     };
