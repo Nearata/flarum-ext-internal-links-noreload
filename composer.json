@@ -12,7 +12,7 @@
         "forum": "https://discuss.flarum.org/d/26844"
     },
     "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+        "flarum/core": "^1.0"
     },
     "authors": [
         {

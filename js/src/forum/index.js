@@ -1,7 +1,6 @@
 import { extend } from 'flarum/common/extend';
 import CommentPost from 'flarum/forum/components/CommentPost';
 
-
 app.initializers.add('nearata-internal-links-noreload', app => {
     function addNoReload() {
         const baseUrl = app.forum.attribute('baseUrl');
@@ -27,7 +26,7 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                 m.route.set(path);
             });
         }
-    };
+    }
 
     extend(CommentPost.prototype, 'oncreate', addNoReload);
     extend(CommentPost.prototype, 'onupdate', addNoReload);
