@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-composer require nearata/flarum-ext-internal-links-noreload
+composer require nearata/flarum-ext-internal-links-noreload:"*"
 ```
 
 ## Update
