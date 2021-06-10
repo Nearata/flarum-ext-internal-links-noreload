@@ -1,8 +1,9 @@
 import { extend } from 'flarum/common/extend';
+import app from 'flarum/forum/app'
 import CommentPost from 'flarum/forum/components/CommentPost';
 
-app.initializers.add('nearata-internal-links-noreload', app => {
-    function addNoReload() {
+app.initializers.add('nearata-internal-links-noreload', () => {
+    extend(CommentPost.prototype, ['oncreate', 'onupdate'], function () {
         const baseUrl = app.forum.attribute('baseUrl');
         const postBody = this.element.querySelector('.Post-body');
         const elements = postBody.querySelectorAll('a');
@@ -18,16 +19,19 @@ app.initializers.add('nearata-internal-links-noreload', app => {
                 continue;
             }
 
+            const path = href.replace(baseUrl, '');
+            const elements = path.split('/');
+            const isFile = elements[elements.length-1].match(/(.*)\.(.*)/i);
+
+            if (isFile) {
+                continue;
+            }
+
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                const path = href.replace(baseUrl, '');
 
                 m.route.set(path);
             });
         }
-    }
-
-    extend(CommentPost.prototype, 'oncreate', addNoReload);
-    extend(CommentPost.prototype, 'onupdate', addNoReload);
+    });
 });
