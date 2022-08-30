@@ -5,7 +5,7 @@
         "flarum"
     ],
     "type": "flarum-extension",
-    "license": "MIT",
+    "license": "Unlicense",
     "support": {
         "issues": "https://github.com/Nearata/flarum-ext-internal-links-noreload/issues",
         "source": "https://github.com/Nearata/flarum-ext-internal-links-noreload",
@@ -17,7 +17,7 @@
     "authors": [
         {
             "name": "Nearata",
-            "email": "williamdicicco@protonmail.com",
+            "email": "nearata@protonmail.com",
             "role": "Developer"
         }
     ],
