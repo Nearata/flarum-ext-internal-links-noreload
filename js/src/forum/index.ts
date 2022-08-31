@@ -14,6 +14,10 @@ app.initializers.add("nearata-internal-links-noreload", () => {
             return;
         }
 
+        if (origin.target) {
+            return;
+        }
+
         const path = origin.href.replace(base, "");
         const elements = path.split("/");
         const isFile = elements[elements.length - 1].match(/(.*)\.(.*)/i);
