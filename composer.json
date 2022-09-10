@@ -1,6 +1,6 @@
 {
     "name": "nearata/flarum-ext-internal-links-noreload",
-    "description": "Internal links in posts no longer trigger a page reload.",
+    "description": "Internal links no longer trigger a page reload.",
     "keywords": [
         "flarum"
     ],
