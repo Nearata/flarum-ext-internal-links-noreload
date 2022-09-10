@@ -1,6 +1,6 @@
 # Internal Links No Reload
 
-> A [Flarum](http://flarum.org) extension. Internal links in posts no longer trigger a page reload.
+> A [Flarum](http://flarum.org) extension. Internal links no longer trigger a page reload.
 
 ## Install
 
