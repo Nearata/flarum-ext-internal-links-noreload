@@ -12,7 +12,7 @@
         "forum": "https://discuss.flarum.org/d/26844"
     },
     "require": {
-        "flarum/core": "^1.0"
+        "flarum/core": "^1.8"
     },
     "authors": [
         {
@@ -35,9 +35,6 @@
                 "backgroundColor": "#738290",
                 "color": "#fff"
             }
-        },
-        "flagrow": {
-            "discuss": ""
         }
     }
 }
